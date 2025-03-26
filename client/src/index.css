@@ -3,10 +3,13 @@
 
 @custom-variant dark (&:is(.dark *));
 html, body, #root {
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: black; /* Ensure the entire screen is black */
 }
+
 
 :root {
   --radius: 0.625rem;
