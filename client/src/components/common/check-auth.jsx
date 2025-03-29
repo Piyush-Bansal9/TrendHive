@@ -4,11 +4,11 @@ export default function CheckAuth({isAuthenticated, user, children}) {
     const location = useLocation() ;
     // useLocation gives the current location/path of the page.
 
-    if(!isAuthenticated && !(location.pathname.includes("/register") || location.pathname.includes("/login"))) {
-        return <Navigate to="/auth/login" />
+    if(!isAuthenticated && !(location.pathname.includes("/signup") || location.pathname.includes("/signin"))) {
+        return <Navigate to="/auth/signin" />
     }
 
-    if(isAuthenticated && (location.pathname.includes('/register') || location.pathname.includes('/login'))) {
+    if(isAuthenticated && (location.pathname.includes('/signup') || location.pathname.includes('/signin'))) {
         if(user?.role === 'admim') {
             return <Navigate to="/admin/dashboard" />
         }else {
