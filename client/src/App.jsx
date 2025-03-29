@@ -14,6 +14,8 @@ import ShoppingListing from './pages/shopping-view/listing'
 import ShoppingAccount from './pages/shopping-view/account'
 import ShoppingCheckout from './pages/shopping-view/checkout'
 import NotFound from './components/notFound/layout'
+import CheckAuth from './components/common/check-auth'
+import UnAuthPage from './pages/un-auth'
 
 
 function App() {
@@ -22,21 +24,31 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/auth' element = {<AuthLayout/>}>
+        <Route path='/auth' element = {
+          <CheckAuth>
+            <AuthLayout/>
+          </CheckAuth>}>
           <Route path='signup' element = {<Signup/>} />
           <Route path='signin' element = {<Signin/>} />
         </Route>
-        <Route path='/admin' element = {<Adminlayout/>}>
+        <Route path='/admin' element = {
+          <CheckAuth>
+            <Adminlayout/>
+          </CheckAuth>}>
           <Route path='dashboard' element = { <AdminDashboard/>}/>
           <Route path='products' element = {<AdminProducts/>}/>
           <Route path='orders' element = {<AdminOrders/>}/>
         </Route>
-        <Route path='/shopping' element = {<ShoppingLayout/>}>
+        <Route path='/shopping' element = {
+          <CheckAuth>
+            <ShoppingLayout/>
+          </CheckAuth>}>
           <Route path='home' element = {<ShoppingHome/>}/>
           <Route path='listing' element = {<ShoppingListing/>}/>
           <Route path='account' element = {<ShoppingAccount/>}/>
           <Route path='checkout' element = {<ShoppingCheckout/>}/>
         </Route>
+        <Route path='/unauth-page' element = {<UnAuthPage/>} />
         <Route path='*' element = {<NotFound/>}/>
       </Routes>
     </>
