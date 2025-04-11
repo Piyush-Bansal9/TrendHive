@@ -1,15 +1,10 @@
-const { Label } = require("@radix-ui/react-label");
-const { Select, 
-        SelectTrigger,
-        SelectValue, 
-        SelectContent,
-        SelectItem} = require("@radix-ui/react-select");
-const { Input } = require("postcss");
-const { Textarea } = require("../ui/textarea");
-const { Button } = require("../ui/button");
+import { Label } from '../ui/label.jsx'
+import { Input } from '../ui/input.jsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select.jsx';
+import { Textarea } from '../ui/textarea.jsx';
+import { Button } from '../ui/button.jsx';
 
-
-function Form({formControlller, formData, setFormData, buttonText, onSubmit}) {
+function Form({formController, formData, setFormData, buttonText, onSubmit}) {
 
     function renderComponentsbyType(controlItem) {
         let element = null;
@@ -92,21 +87,23 @@ function Form({formControlller, formData, setFormData, buttonText, onSubmit}) {
 
     return (
         <form onSubmit={onSubmit}>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-6">
                 {
-                    formControlller.map((controlItem) => (
-                        <div className="flex gap-1">
-                            <Label>{controlItem.map}</Label>
+                    formController.map((controlItem) => (
+                        <div key={controlItem.name} className="grid w-full gap-1.5">
+                            <Label className="mb-1">{controlItem.label}</Label>
                             {
                                 renderComponentsbyType(controlItem)
                             }
                         </div>
                     ))
                 }
-            </div>
-            <Button className='w-full mt-2' type="submit">
+                <Button className='w-full mt-2' type="submit">
                 {buttonText || "Submit"}
-            </Button>
+                </Button>
+            </div>
         </form>
     )
 }
+
+export default Form;
