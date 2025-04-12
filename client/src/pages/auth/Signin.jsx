@@ -4,7 +4,12 @@ import Form from "../../components/common/form";
 import { loginformControls } from "../../config";
 
 export default function Signin() {
-    const [formData, setFormData] = useState();
+    const [formData, setFormData] = useState(
+        {
+            email: '',
+            password: ''
+        }
+    );
     function onSubmitHandler(event) {
 
     }
