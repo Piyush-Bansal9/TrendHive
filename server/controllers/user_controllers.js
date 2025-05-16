@@ -18,7 +18,7 @@ const signupSchema = z.object({
     password: PasswordSchema
 })
 
-const register = async(req, res) => {
+const AuthRegister = async(req, res) => {
     try{
         const validationResult = signupSchema.safeParse(req.body);
         if(!validationResult.success) {
@@ -61,7 +61,7 @@ const register = async(req, res) => {
 }
 
 
-const login = async(req, res) => {
+const AuthLogin = async(req, res) => {
     try{
         const email = req.body.email;
         const username = req.body.username;
@@ -113,3 +113,4 @@ const login = async(req, res) => {
     }
 }
 
+module.exports = {AuthRegister, AuthLogin};
