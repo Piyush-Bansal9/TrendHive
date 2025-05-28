@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 function AuthLayout() {
     return (
         <div className="flex min-h-screen w-full m-0">
@@ -10,8 +9,7 @@ function AuthLayout() {
                         Welcome to ECommerce Shopping
                     </h1>
                 </div>
-            </div>
-
+            </div> 
             {/* Right Section */}
             <div className="flex items-center justify-center bg-white w-1/2 px-4 py-12 sm:px-6 lg:px-8">
                 <Outlet />
@@ -19,6 +17,4 @@ function AuthLayout() {
         </div>
     );
 }
-
 export default AuthLayout;
-

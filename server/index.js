@@ -1,9 +1,9 @@
-require('dotenv').config();
-
-const express = require("express")
-const mongoose = require('mongoose')
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("Connected to Mongo DB"))
@@ -11,10 +11,11 @@ mongoose.connect(process.env.MONGO_URL)
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const authRouter = require("./routes/auth-routes")
+import authRouter from './routes/auth-routes.js';
+
 
 app.use(cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
         "Content-Type",

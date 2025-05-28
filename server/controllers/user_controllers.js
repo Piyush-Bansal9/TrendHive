@@ -1,7 +1,7 @@
 import { z } from "zod"
-import { UserModel } from "../../models/User";
-import bcrypt from "bcrypt"
-const jwt = require("jsonwebtoken");
+import  { UserModel } from "../models/User.js";
+import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken";
 
 const PasswordSchema = z
     .string()
@@ -29,13 +29,13 @@ const AuthRegister = async(req, res) => {
             return;
         }
         else {
-            const foundData = await UserModel.findOne({
+            const foundData = await User.findOne({
                 email: validationResult.data.email
             })
             if(!foundData){
                 const passowrd = validationResult.data.password;
                 const hashedPassword = await bcrypt.hash(passowrd, 5);
-                const newUser = await userModel.create({
+                const newUser = await User.create({
                     email: validationResult.data?.email,
                     name: validationResult.data?.name,
                     password: hashedPassword
@@ -66,7 +66,7 @@ const AuthLogin = async(req, res) => {
         const email = req.body.email;
         const username = req.body.username;
         const passowrd = req.body.passowrd;
-        const foundData = UserModel.findOne({
+        const foundData = User.findOne({
             email: email,
             username: username
         })
@@ -112,5 +112,4 @@ const AuthLogin = async(req, res) => {
         return;
     }
 }
-
-module.exports = {AuthRegister, AuthLogin};
+export {AuthRegister, AuthLogin};

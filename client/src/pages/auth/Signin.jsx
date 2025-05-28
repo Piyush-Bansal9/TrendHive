@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import { Link } from "react-router-dom";
 import Form from "../../components/common/form";
 import { loginformControls } from "../../config";
@@ -11,8 +11,9 @@ export default function Signin() {
         }
     );
     function onSubmitHandler(event) {
-
+        
     }
+    console.log(formData);
     return (
         <div className="mx-auto max-w-md w-full space-y-12">
             <div className="text-center">

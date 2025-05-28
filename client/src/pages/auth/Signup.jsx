@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "../../components/common/form.jsx";
 import { registerFormControls } from "../../config/index.js";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../store/auth-slice/index.js";
+import { LogIn } from "lucide-react";
 
 export default function Signup() {
 
@@ -11,8 +14,13 @@ export default function Signup() {
         password: ''
     })
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     function onSubmitHandler(event){
-        
+        event.preventDefault();
+        console.log('Form Data:', formData);
+        dispatch(registerUser(formData)).then((data) => navigate("/auth/signin"))
     }
     return (
         <div className='mx-auto w-full max-w-md space-y-12'>
