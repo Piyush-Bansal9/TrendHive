@@ -8,17 +8,7 @@ const initialState = {
     user: null
 }
 
-export const registerUser = createAsyncThunk('auth/register', 
-    async(formData) => {
-        const response = await axios.post("http://localhost:5000/api/auth/signup", formData, {
-            headers: {
-                'Content-Length': JSON.stringify(requestData).length // Calculate length of the body
-            },
-            withCredentials: true
-        })
-        return response.data
-    }
-)
+
 
 const authSlice = createSlice({
     name: 'auth',
@@ -39,10 +29,38 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;
+        }).addCase(loginUser.pending, (state) => {
+            state.isLoading = true;
+        }).addCase(loginUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload.success ? action.payload.user : null;
+            state.isAuthenticated = action.payload.success;
+        }).addCase(loginUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
         })
 
     }
 })
+
+export const registerUser = createAsyncThunk('auth/register', 
+    async(formData) => {
+        const response = await axios.post("http://localhost:5000/api/auth/signup", formData, {
+            withCredentials: true
+        })
+        return response.data
+    }
+)
+
+export const loginUser = createAsyncThunk('/auth/login',  
+    async (formData) => {
+        const response = await axios.post('http://localhost:5000/api/auth/user/signin', formData, {
+            withCredentials: true
+        })
+        return response.data
+    }
+)
 
 export const {setUserInfo} = authSlice.actions;
 export default authSlice.reducer;

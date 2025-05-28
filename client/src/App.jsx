@@ -16,10 +16,11 @@ import ShoppingCheckout from './pages/shopping-view/checkout'
 import NotFound from './components/notFound/layout'
 import CheckAuth from './components/common/check-auth'
 import UnAuthPage from './pages/un-auth'
+import { useSelector } from 'react-redux'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {isAuthenticated, user, isLoading} = useSelector(state => state.auth)
 
   return (
     <>

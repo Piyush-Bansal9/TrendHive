@@ -2,6 +2,8 @@ import { use, useState } from "react"
 import { Link } from "react-router-dom";
 import Form from "../../components/common/form";
 import { loginformControls } from "../../config";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/auth-slice";
 
 export default function Signin() {
     const [formData, setFormData] = useState(
@@ -10,8 +12,23 @@ export default function Signin() {
             password: ''
         }
     );
+    const dispatch = useDispatch();
     function onSubmitHandler(event) {
-        
+        event.preventDefault()
+        dispatch(loginUser(formData))
+        // .then( (data) => {
+        //     if(data?.payload?.success){
+        //         toast({
+        //             title: data?.payload?.message
+        //         })
+        //     }
+        //     else{
+        //         toast({
+        //             title: data?.payload?.message,
+        //             variant: 'destructive'
+        //         })
+        //     }
+        // } )
     }
     console.log(formData);
     return (

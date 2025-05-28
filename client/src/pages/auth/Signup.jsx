@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../store/auth-slice/index.js";
 import { LogIn } from "lucide-react";
 
+
 export default function Signup() {
 
     const [formData, setFormData] = useState({
@@ -20,7 +21,10 @@ export default function Signup() {
     function onSubmitHandler(event){
         event.preventDefault();
         console.log('Form Data:', formData);
-        dispatch(registerUser(formData)).then((data) => navigate("/auth/signin"))
+        dispatch(registerUser(formData)).then((data) =>{
+            console.log(data);
+            
+        })
     }
     return (
         <div className='mx-auto w-full max-w-md space-y-12'>
