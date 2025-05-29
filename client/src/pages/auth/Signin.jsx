@@ -16,19 +16,9 @@ export default function Signin() {
     function onSubmitHandler(event) {
         event.preventDefault()
         dispatch(loginUser(formData))
-        // .then( (data) => {
-        //     if(data?.payload?.success){
-        //         toast({
-        //             title: data?.payload?.message
-        //         })
-        //     }
-        //     else{
-        //         toast({
-        //             title: data?.payload?.message,
-        //             variant: 'destructive'
-        //         })
-        //     }
-        // } )
+        .then( (data) => {
+            alert(data?.payload?.message);
+        } )
     }
     console.log(formData);
     return (

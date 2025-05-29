@@ -20,11 +20,15 @@ export default function Signup() {
 
     function onSubmitHandler(event){
         event.preventDefault();
-        console.log('Form Data:', formData);
-        dispatch(registerUser(formData)).then((data) =>{
-            console.log(data);
-            
-        })
+    dispatch(registerUser(formData)).then((data) => {
+        // console.log(data);
+        if (data?.payload?.success) {
+            alert(data?.payload?.message);
+            navigate("/auth/signin");
+        } else {
+            alert(data?.payload?.message);
+        }
+    });
     }
     return (
         <div className='mx-auto w-full max-w-md space-y-12'>

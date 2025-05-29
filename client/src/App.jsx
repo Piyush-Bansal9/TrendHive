@@ -26,14 +26,14 @@ function App() {
     <>
       <Routes>
         <Route path='/auth' element = {
-          <CheckAuth>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user} >
             <AuthLayout/>
           </CheckAuth>}>
           <Route path='signup' element = {<Signup/>} />
           <Route path='signin' element = {<Signin/>} />
         </Route>
         <Route path='/admin' element = {
-          <CheckAuth>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user} >
             <Adminlayout/>
           </CheckAuth>}>
           <Route path='dashboard' element = { <AdminDashboard/>}/>
@@ -41,7 +41,7 @@ function App() {
           <Route path='orders' element = {<AdminOrders/>}/>
         </Route>
         <Route path='/shopping' element = {
-          <CheckAuth>
+          <CheckAuth isAuthenticated={isAuthenticated} user={user} >
             <ShoppingLayout/>
           </CheckAuth>}>
           <Route path='home' element = {<ShoppingHome/>}/>
