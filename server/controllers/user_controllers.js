@@ -90,4 +90,32 @@ const AuthLogin = async (req, res) => {
         }
     };
     
-export {AuthRegister, AuthLogin};
+const logoutUser = (req, res) => {
+    res.clearCookie('token').json({
+        success: true,
+        message: 'Logged out successfully!'
+    })
+}
+
+const authMiddleware = async(req, res, next) => {
+    const token = req.cookies.token;
+    if(!token) {
+        res.status(401).json({
+            success: false,
+            message: "Unauthorized"
+        })
+    }
+    try {
+        const decodedToken = jwt.verify(token, "CLIENT_SECRET_KEY");
+        req.user = decodedToken;
+        next();
+    } catch(e) {
+        res.status(401).json({
+            success: false,
+            message: "Unauthorized"
+        })
+    }
+
+}
+
+export {AuthRegister, AuthLogin, logoutUser, authMiddleware};
