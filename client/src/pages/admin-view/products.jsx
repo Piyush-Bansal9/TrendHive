@@ -1,8 +1,9 @@
-import { Fragment, useState } from "react"
+import { Fragment, use, useState } from "react"
 import { Button } from "../../components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../../components/ui/sheet";
 import Form from "../../components/common/form";
 import { addProductFormElements } from "../../config";
+import ProductImageUpload from "../../components/admin-view/image-upload";
 
 
 const initialFormData = {
@@ -19,6 +20,8 @@ const initialFormData = {
 function AdminProducts() {
     const [addProductDialog, setAddProductDialog] = useState(false);
     const [formData, setFormData] = useState(initialFormData);
+    const [imageFile, setImageFile] = useState(null);
+    const [uploadedimageURL, setuploadedImageURL] = useState("");
 
     function onSubmit() {
 
@@ -35,6 +38,7 @@ function AdminProducts() {
                     <SheetHeader>
                         <SheetTitle>Add New Product</SheetTitle>
                     </SheetHeader>
+                    <ProductImageUpload imageFile = {imageFile} setImageFile = {setImageFile} uploadedimageURL = {uploadedimageURL} setuploadedImageURL = {setuploadedImageURL}/>
                     <div className="p-6">
                         <Form 
                         onSubmit={onSubmit}
