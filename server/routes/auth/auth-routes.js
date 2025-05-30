@@ -6,7 +6,7 @@ import {
     AuthLogin,
     logoutUser,
     authMiddleware
-} from '../controllers/user_controllers.js'
+} from '../../controllers/user_controllers.js'
 
 router.post("/signup", AuthRegister);
 router.post("/signin", AuthLogin);
