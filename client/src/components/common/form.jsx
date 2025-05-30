@@ -37,7 +37,7 @@ function Form({formController, formData, setFormData, buttonText, onSubmit}) {
                         })
                     }}>
                         <SelectTrigger>
-                            <SelectValue placeholder={controlItem.placeholder}/>
+                            <SelectValue placeholder={controlItem.label}/>
                         </SelectTrigger>
                         <SelectContent>
                             {controlItem.options && controlItem.options.length > 0 ? 

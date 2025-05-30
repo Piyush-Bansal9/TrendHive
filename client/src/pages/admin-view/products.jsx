@@ -2,9 +2,28 @@ import { Fragment, useState } from "react"
 import { Button } from "../../components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../../components/ui/sheet";
 import Form from "../../components/common/form";
+import { addProductFormElements } from "../../config";
+
+
+const initialFormData = {
+    image: null,
+    title: "",
+    description: "",
+    category: "",
+    brand: "",
+    price: "",
+    salePrice: "",
+    totalStock: "",
+};
 
 function AdminProducts() {
     const [addProductDialog, setAddProductDialog] = useState(false);
+    const [formData, setFormData] = useState(initialFormData);
+
+    function onSubmit() {
+
+    }
+
     return (
         <Fragment>
             <div className="mb-5 flex justify-end w-full">
@@ -16,8 +35,12 @@ function AdminProducts() {
                     <SheetHeader>
                         <SheetTitle>Add New Product</SheetTitle>
                     </SheetHeader>
-                    <div className="py-6">
-                        <Form ></Form>
+                    <div className="p-6">
+                        <Form 
+                        onSubmit={onSubmit}
+                        formController={addProductFormElements} formData={formData} setFormData={setFormData}
+                        buttonText="Add Product"
+                        ></Form>
                     </div>
                 </SheetContent>
             </Sheet>
