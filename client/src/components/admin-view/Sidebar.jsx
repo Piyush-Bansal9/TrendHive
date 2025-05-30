@@ -30,8 +30,8 @@ const sidebarMenuItems = [
 function MenuItems({setOpen}) {
     const navigate = useNavigate();
 
-    return <nav className="mt-8 flex-col flex gap-2">
-        {sidebarMenuItems.map(item => <div
+    return (<nav className="mt-8 flex-col flex gap-2">
+        {sidebarMenuItems.map((item) => (<div
             key = {item.id}
             className="flex cursor-pointer text-xl items-center gap-2 rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground"
             onClick={
@@ -43,15 +43,16 @@ function MenuItems({setOpen}) {
         >
             {item.icon}
             <span>{item.label}</span>
-        </div>)}
-    </nav>
+        </div>))}
+    </nav>)
 }
 
 function AdminSidebar({open, setOpen}) {
     const navigate = useNavigate();
-    return <Fragment>
+    return (<Fragment>
         <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="left" className="w-64">
+        <SheetContent side="left"
+    className="w-64 bg-white z-[50] shadow-lg">
             <div className="flex flex-col h-full">
                 <SheetHeader className="border-b">
                 <SheetTitle className="flex gap-2 mt-5 mb-5">
@@ -68,12 +69,12 @@ function AdminSidebar({open, setOpen}) {
                 onClick={() => navigate("/admin/dashboard")}
                 className="flex cursor-pointer items-center gap-2"
             >
-                <Shield />
+                <Shield size={30}/>
                 <h1 className="text-2xl font-extrabold">Admin Panel</h1>
             </div>
             <MenuItems/>
         </aside>
-    </Fragment>
+    </Fragment>);
 }
 
 export default AdminSidebar
