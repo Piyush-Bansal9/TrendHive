@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import axios from "axios";
 
 
-export default function ProductImageUpload({imageFile, setImageFile, uploadedimageURL, setuploadedImageURL}) {
+export default function ProductImageUpload({imageFile, setImageFile, uploadedimageURL, setuploadedImageURL, setImageLoading}) {
 
     const inputRef = useRef(null);
 
@@ -36,11 +36,15 @@ export default function ProductImageUpload({imageFile, setImageFile, uploadedima
     }
 
     async function uploadImagetoCloudinary() {
+        setImageLoading(true);
         const data = new FormData();
         data.append("my_file", imageFile);
-        const response = axios.post("http://localhost:5000/api/admin/products/upload-image", data);
+        const response = await axios.post("http://localhost:5000/api/admin/products/upload-image", data);
         console.log(response);
-
+        if(response?.data?.success) {
+            setuploadedImageURL(response.data.result.url);
+            setImageLoading(false);
+        }
         
     }
 
