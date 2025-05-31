@@ -1,8 +1,8 @@
 import express from "express";
-import { upload } from "../../helpers/cloud";
-import { handleImageUpload } from "../../controllers/admin/products.controller";
-const router = express.Router;
+import { imageHandler } from "../../controllers/admin/products_controller.js";
+import { upload } from "../../helpers/cloudinary.js";
+const router = express.Router();
 
-router.post("/upload-image", upload.single("my_file"), handleImageUpload);
+router.post("upload_image", upload.single("my_file"),imageHandler)
 
 export default router;
