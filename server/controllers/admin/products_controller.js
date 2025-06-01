@@ -44,13 +44,13 @@ const getAllProducts = async(req, res) => {
     try {
         const listOfProducts = await Product.find({});
         res.status(200).json({
-            succes: true,
+            success: true,
             data: listOfProducts
         })
     } catch(e) {
         console.log(e);
         res.status(500).json({
-            succes: false,
+            success: false,
             message: "Error occured."
         })
     }
@@ -60,10 +60,10 @@ const editProduct = async(req, res) => {
     try {
         const { id } = req.params;
         const {image, title, description, category, brand, price, salePrice, totalStock} = req.body;
-        const foundProduct = await Product.findById(id);
+        let foundProduct = await Product.findById(id);
         if(!foundProduct) {
             return res.status(404).json({
-                succes: false,
+                success: false,
                 message: "Product not found."
             })
         }
@@ -71,19 +71,19 @@ const editProduct = async(req, res) => {
         foundProduct.description = description || foundProduct.description;
         foundProduct.category = category || foundProduct.category;
         foundProduct.brand = brand || foundProduct.brand;
-        foundProduct.price = price || foundProduct.price;
-        foundProduct.salePrice = salePrice || foundProduct.salePrice;
+        foundProduct.price = price === "" ? 0 : price || foundProduct.price;
+        foundProduct.salePrice = salePrice === "" ? 0 : salePrice || foundProduct.salePrice;
         foundProduct.totalStock = totalStock || foundProduct.totalStock;
         foundProduct.image = image || foundProduct.image;
         await foundProduct.save();
         res.status(200).json({
-            succes: true,
+            success: true,
             data: foundProduct
         })
     } catch(e) {
         console.log(e);
         res.status(500).json({
-            succes: false,
+            success: false,
             message: "Error occured."
         })
     }
@@ -95,7 +95,7 @@ const deleteProduct = async(req, res) => {
         const foundProduct = await Product.findByIdAndDelete(id);
         if(!foundProduct) {
             return res.status(404).json({
-                succes: false,
+                success: false,
                 message: "Product not found."
             })
         }
@@ -106,7 +106,7 @@ const deleteProduct = async(req, res) => {
     } catch(e) {
         console.log(e);
         res.status(500).json({
-            succes: false,
+            success: false,
             message: "Error occured."
         })
     }
