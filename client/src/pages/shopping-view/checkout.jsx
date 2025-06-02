@@ -1,7 +1,7 @@
 function ShoppingCheckout() {
-    return <diV>
+    return <div>
 
-    </diV>
+    </div>
 }
 
 export default ShoppingCheckout

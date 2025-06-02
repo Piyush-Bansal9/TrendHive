@@ -1,7 +1,7 @@
 function ShoppingAccount() {
-    return <diV>
+    return <div>
 
-    </diV>
+    </div>
 }
 
 export default ShoppingAccount

@@ -1,7 +1,7 @@
 function ShoppingHome() {
-    return <diV>
+    return <div>
 
-    </diV>
+    </div>
 }
 
 export default ShoppingHome
