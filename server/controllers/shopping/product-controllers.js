@@ -2,7 +2,46 @@ import Product from "../../models/Product.js";
 
 const getFilteredProducts = async(req, res) => {
     try{
-        const products = await Product.find({});
+
+        const {category = [], brand = [], sortBy = "price-lowtohigh"} = req.query; 
+
+        let filters = {};
+
+        if(category.length) {
+            filters.category = {
+                $in : category.split(',')          // MongoDB query condition, .split() returns an array
+            }
+            //This is how MongoDB understands:
+            // "Find documents where the category field's value is in this array."
+        }
+
+        if(brand.length) {
+            filters.brand = {
+                $in: brand.split(',')
+            }
+        }
+
+        let sort = {};
+
+        switch (sortBy) {
+            case "price-lowtohigh":
+                sort.price = 1;
+                break;
+            case "price-hightolow":
+                sort.price = -1;
+                break;
+            case "title-atoz":
+                sort.title = 1;
+                break;
+            case "title-ztoa":
+                sort.title = -1;
+                break;
+            default:
+                sort.price = 1;
+                break;
+        }
+
+        const products = await Product.find(filters).sort(sort);
         res.status(200).json({
             success: true,
             data: products
@@ -13,8 +52,28 @@ const getFilteredProducts = async(req, res) => {
             success: false,
             message: "Error Occured."
         });
-        
     }
 }
 
-export {getFilteredProducts}
+const getProductDetails = async(req, res) => {
+    try{
+        const {id} = req.params;
+        const foundProduct = await Product.findById(id);
+        if(!foundProduct) return res.status(404).json({
+            success: false,
+            message: "Product not found"
+        })
+        res.status(200).json({
+            success: true, 
+            data: foundProduct
+        })
+    }catch(e) {
+        console.log(e);
+        res.status(500).json({
+            success: false,
+            message: "Error Occured."
+        });
+    }
+}
+
+export {getFilteredProducts, getProductDetails}
