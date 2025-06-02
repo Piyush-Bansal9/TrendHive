@@ -3,7 +3,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import adminRouter from './routes/admin/products_routes.js'
+import adminProductsRouter from './routes/admin/products_routes.js'
+import shopProductsRouter from './routes/shopping/products-routes.js'
 
 dotenv.config({path: './.env'})
 
@@ -38,8 +39,8 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-app.use("/api/admin/products", adminRouter);
-
+app.use("/api/admin/products", adminProductsRouter);
+app.use("/api/shopping/products", shopProductsRouter);
 
 app.listen(PORT, () => console.log(`Server is running at port ${PORT}`));
 
