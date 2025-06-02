@@ -1,9 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { Separator } from "../ui/separator";
 
 
 function ProductDetailsDialog({open, setOpen, productDetails}) {
+    const dispatch = useDispatch();
+    const {user} = useSelector(state => state.auth)
+
+    function handleAddToCart(getCurrentProductId) {
+            dispatch(addToCart({userId : user.id, productId : getCurrentProductId, quantity : 1}))
+            .then((data) => {
+                if(data?.payload?.success) {
+                    dispatch(fetchCartItems(user?.id));
+                    alert("Product added to cart successfully!")
+                }
+            });
+            
+        }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -39,7 +53,9 @@ function ProductDetailsDialog({open, setOpen, productDetails}) {
                         ) : null}
                     </div>
                     <div className="mt-5 mb-5">
-                        <Button className="bg-black text-white w-full">
+                        <Button className="bg-black text-white w-full" onClick={() => handleAddToCart(
+                    productDetails?._id)
+                }>
                             Add to Cart
                         </Button>
                     </div>

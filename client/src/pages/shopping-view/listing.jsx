@@ -9,6 +9,7 @@ import { getAllFilteredProducts, getProductDetails } from "../../store/shopping/
 import ShoppingProductTile from "../../components/shopping-view/product-tile"
 import { useSearchParams } from "react-router-dom"
 import ProductDetailsDialog from "../../components/shopping-view/product-details"
+import { addToCart, fetchCartItems } from "../../store/shopping/cart-slice"
 
 function createSearchParamHelper(filterParams) {
     const queryParams = [];
@@ -29,6 +30,7 @@ function ShoppingListing() {
     const [sort, setSort] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const [openDeatilsDialog, setOpenDetailsDialog] = useState(false);
+    const {user} = useSelector(state => state.auth);
 
     function handleSort(value) {
         setSort(value);
@@ -61,6 +63,17 @@ function ShoppingListing() {
         dispatch(getProductDetails(getCurrentProductId));
     }
 
+    function handleAddToCart(getCurrentProductId) {
+        dispatch(addToCart({userId : user.id, productId : getCurrentProductId, quantity : 1}))
+        .then((data) => {
+            if(data?.payload?.success) {
+                dispatch(fetchCartItems(user?.id));
+                alert("Product added to cart successfully!")
+            }
+        });
+        
+    }
+
     // Default values on page-reload;
     useEffect(() => {
         setSort("price-lowtohigh");
@@ -84,7 +97,6 @@ function ShoppingListing() {
         if(productDetails !== null) setOpenDetailsDialog(true);
     }, [productDetails])
 
-    console.log(productDetails, 'details');
     
     return <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
         <PorductFilter
@@ -126,6 +138,7 @@ function ShoppingListing() {
                             listOfProducts && listOfProducts.length > 0 ?
                             listOfProducts.map(productItem => <ShoppingProductTile key={productItem._id} product={productItem}
                                     handleGetProductDetails={handleGetProductDetails}
+                                    handleAddToCart={handleAddToCart }
                                 />)
                             : null
                         }

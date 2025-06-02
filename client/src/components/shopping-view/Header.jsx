@@ -8,6 +8,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/auth-slice";
+import { useEffect, useState } from "react";
+import UserCartWrapper from "./cart-wrapper";
+import { fetchCartItems } from "../../store/shopping/cart-slice";
 
 function MenuItems() {
     const navigate = useNavigate();
@@ -31,18 +34,33 @@ function MenuItems() {
 
 function HeaderRightContent() {
     const {user} = useSelector((state) => state.auth);
+    const [openCartSheet, setOpenCartSheet] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const {cartItems} = useSelector(state => state.shopCart)
 
     function handleLogout() {
         dispatch(logoutUser());
     }
 
+    useEffect(() => {
+        dispatch(fetchCartItems(user?.id));
+    }, [dispatch]);
+
     return <div className="flex lg:items-center lg:flex-row flex-col gap-4">
-        <Button variant="outline" size="icon">
-            <ShoppingCart className="h-6 w-6"/>
-            <span className="sr-only">User Cart</span>
-        </Button>
+        <Sheet open = {openCartSheet} onOpenChange = {() => setOpenCartSheet(false)}>
+            <Button onClick= {() => setOpenCartSheet(true)} variant="outline" size="icon">
+                <ShoppingCart className="h-6 w-6"/>
+                <span className="sr-only">User Cart</span>
+            </Button>
+            <UserCartWrapper 
+                cartItems={
+                    cartItems && cartItems.items && cartItems.items.length > 0
+                        ? cartItems.items
+                        : []
+                }
+            />
+        </Sheet>
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Avatar className="bg-black rounded-full w-10 h-10">
