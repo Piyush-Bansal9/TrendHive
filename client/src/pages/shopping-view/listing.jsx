@@ -78,7 +78,7 @@ function ShoppingListing() {
     useEffect(() => {
         setSort("price-lowtohigh");
         setFilters(JSON.parse(sessionStorage.getItem("filters")) || {})
-    }, [])
+    }, [searchParams])
 
     // Update the search address whenever filters are changed(checked or unchecked)
     useEffect(() => {

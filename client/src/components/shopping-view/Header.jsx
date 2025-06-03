@@ -1,5 +1,5 @@
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
 import { Button } from "../ui/button"
 import { Label } from "../ui/label";
@@ -14,15 +14,20 @@ import { fetchCartItems } from "../../store/shopping/cart-slice";
 
 function MenuItems() {
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     function handleNavigate(menuItem) {
-        sessionStorage.removeItem('filters');
+        sessionStorage.removeItem("filters");
         const currentFilter = menuItem.id !== 'home' ? 
         {
             category : [menuItem.id]
         } : null
 
-        sessionStorage.setItem('filters', JSON.stringify(currentFilter));
-        navigate(menuItem.path);
+        sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+        location.pathname.includes("listing") && currentFilter !== null
+        ? setSearchParams(
+            new URLSearchParams(`?category=${menuItem.id}`)
+            )
+        : navigate(menuItem.path);
     }
     return  (
         <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
@@ -58,7 +63,7 @@ function HeaderRightContent() {
 
     return <div className="flex lg:items-center lg:flex-row flex-col gap-4">
         <Sheet open = {openCartSheet} onOpenChange = {() => setOpenCartSheet(false)}>
-            <Button onClick= {() => setOpenCartSheet(true)} variant="outline" size="icon">
+            <Button onClick= {() => setOpenCartSheet(true)} variant="outline" size="icon" className="relative">
                 <ShoppingCart className="h-6 w-6"/>
                 <span className="sr-only">User Cart</span>
             </Button>
@@ -68,6 +73,7 @@ function HeaderRightContent() {
                         ? cartItems.items
                         : []
                 }
+                setOpenCartSheet={setOpenCartSheet}
             />
         </Sheet>
         <DropdownMenu>
