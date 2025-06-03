@@ -15,13 +15,22 @@ import { fetchCartItems } from "../../store/shopping/cart-slice";
 function MenuItems() {
     const navigate = useNavigate();
     function handleNavigate(menuItem) {
+        sessionStorage.removeItem('filters');
+        const currentFilter = menuItem.id !== 'home' ? 
+        {
+            category : [menuItem.id]
+        } : null
+
+        sessionStorage.setItem('filters', JSON.stringify(currentFilter));
         navigate(menuItem.path);
     }
     return  (
         <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
             {shoppingViewHeaderMenuItems.map((menuItem) => (
             <Label
-                onClick={() => handleNavigate(menuItem)}
+                onClick={() => {
+                    handleNavigate(menuItem)
+                }}
                 className="text-sm font-medium cursor-pointer"
                 key={menuItem.id}
             >

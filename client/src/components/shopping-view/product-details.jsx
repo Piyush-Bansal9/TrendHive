@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { Separator } from "../ui/separator";
+import { setProductDetails } from "../../store/shopping/products-slice";
+import { addToCart, fetchCartItems } from "../../store/shopping/cart-slice";
 
 
 function ProductDetailsDialog({open, setOpen, productDetails}) {
@@ -18,9 +20,14 @@ function ProductDetailsDialog({open, setOpen, productDetails}) {
             });
             
         }
+        
+        function handleDialogClose() {
+            setOpen(false);
+            dispatch(setProductDetails());
+        }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={handleDialogClose}>
             <DialogContent className="bg-white grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
                 <div className="relative overflow-hidden rounded-lg">
                     <img
