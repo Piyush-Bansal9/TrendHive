@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import UserCartItemsContent from "../../components/shopping-view/cart-items-content";
 import { Button } from "../../components/ui/button";
 import { useState } from "react";
-// import { createNewOrder } from "@/store/shop/order-slice";
+import { createNewOrder } from "../../store/shopping/order-slice";
 import { Navigate } from "react-router-dom";
 // import { useToast } from "@/components/ui/use-toast";
 
 function ShoppingCheckout() {
     const { cartItems } = useSelector((state) => state.shopCart);
     const { user } = useSelector((state) => state.auth);
-    // const { approvalURL } = useSelector((state) => state.shopOrder);
+    const { approvalURL } = useSelector((state) => state.shopOrder);
     const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
     const [isPaymentStart, setIsPaymemntStart] = useState(false);
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function ShoppingCheckout() {
             )
         : 0;
 
-    // function handleInitiatePaypalPayment() {
+    function handleInitiatePaypalPayment() {
     //     if (cartItems.length === 0) {
     //         toast({
     //             title: "Your cart is empty. Please add items to proceed",
@@ -49,50 +49,50 @@ function ShoppingCheckout() {
     //         return;
     //     }
 
-    //     const orderData = {
-    //     userId: user?.id,
-    //     cartId: cartItems?._id,
-    //     cartItems: cartItems.items.map((singleCartItem) => ({
-    //         productId: singleCartItem?.productId,
-    //         title: singleCartItem?.title,
-    //         image: singleCartItem?.image,
-    //         price:
-    //         singleCartItem?.salePrice > 0
-    //             ? singleCartItem?.salePrice
-    //             : singleCartItem?.price,
-    //         quantity: singleCartItem?.quantity,
-    //     })),
-    //     addressInfo: {
-    //         addressId: currentSelectedAddress?._id,
-    //         address: currentSelectedAddress?.address,
-    //         city: currentSelectedAddress?.city,
-    //         pincode: currentSelectedAddress?.pincode,
-    //         phone: currentSelectedAddress?.phone,
-    //         notes: currentSelectedAddress?.notes,
-    //     },
-    //         orderStatus: "pending",
-    //         paymentMethod: "paypal",
-    //         paymentStatus: "pending",
-    //         totalAmount: totalCartAmount,
-    //         orderDate: new Date(),
-    //         orderUpdateDate: new Date(),
-    //         paymentId: "",
-    //         payerId: "",
-    //     };
+        const orderData = {
+            userId: user?.id,
+            cartId: cartItems?._id,
+            cartItems: cartItems.items.map((singleCartItem) => ({
+                productId: singleCartItem?.productId,
+                title: singleCartItem?.title,
+                image: singleCartItem?.image,
+                price:
+                singleCartItem?.salePrice > 0
+                    ? singleCartItem?.salePrice
+                    : singleCartItem?.price,
+                quantity: singleCartItem?.quantity,
+            })),
+            addressInfo: {
+                addressId: currentSelectedAddress?._id,
+                address: currentSelectedAddress?.address,
+                city: currentSelectedAddress?.city,
+                pincode: currentSelectedAddress?.pincode,
+                phone: currentSelectedAddress?.phone,
+                notes: currentSelectedAddress?.notes,
+            },
+                orderStatus: "pending",
+                paymentMethod: "paypal",
+                paymentStatus: "pending",
+                totalAmount: totalCartAmount,
+                orderDate: new Date(),
+                orderUpdateDate: new Date(),
+                paymentId: "",
+                payerId: "",
+        };
 
-    //     dispatch(createNewOrder(orderData)).then((data) => {
-    //     console.log(data, "sangam");
-    //     if (data?.payload?.success) {
-    //         setIsPaymemntStart(true);
-    //     } else {
-    //         setIsPaymemntStart(false);
-    //     }
-    //     });
-    // }
+        dispatch(createNewOrder(orderData)).then((data) => {
+            console.log(data, "piyush");
+            if (data?.payload?.success) {
+                setIsPaymemntStart(true);
+            } else {
+                setIsPaymemntStart(false);
+            }
+        });
+    }
 
-    // if (approvalURL) {
-    //     window.location.href = approvalURL;
-    // }
+    if (approvalURL) {
+        window.location.href = approvalURL;
+    }
 
     return (
         <div className="flex flex-col">
@@ -117,7 +117,7 @@ function ShoppingCheckout() {
                 </div>
             </div>
             <div className="mt-4 w-full">
-                <Button className="w-full bg-black text-white" >
+                <Button className="w-full bg-black text-white" onClick = {handleInitiatePaypalPayment}>
                 {/* {isPaymentStart
                     ? "Processing Paypal Payment..."
                     : "Checkout with Paypal" */}

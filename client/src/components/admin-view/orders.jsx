@@ -10,39 +10,38 @@
 //     TableHeader,
 //     TableRow,
 //     } from "../ui/table";
-//     import ShoppingOrderDetailsView from "./order-details";
+//     import AdminOrderDetailsView from "./order-details";
 //     import { useDispatch, useSelector } from "react-redux";
 //     import {
-//     getAllOrdersByUserId,
-//     getOrderDetails,
+//     getAllOrdersForAdmin,
+//     getOrderDetailsForAdmin,
 //     resetOrderDetails,
-//     } from "@/store/shop/order-slice";
+//     } from "@/store/admin/order-slice";
 //     import { Badge } from "../ui/badge";
 
-//     function ShoppingOrders() {
+//     function AdminOrdersView() {
 //     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+//     const { orderList, orderDetails } = useSelector((state) => state.adminOrder);
 //     const dispatch = useDispatch();
-//     const { user } = useSelector((state) => state.auth);
-//     const { orderList, orderDetails } = useSelector((state) => state.shopOrder);
 
 //     function handleFetchOrderDetails(getId) {
-//         dispatch(getOrderDetails(getId));
+//         dispatch(getOrderDetailsForAdmin(getId));
 //     }
 
 //     useEffect(() => {
-//         dispatch(getAllOrdersByUserId(user?.id));
+//         dispatch(getAllOrdersForAdmin());
 //     }, [dispatch]);
+
+//     console.log(orderDetails, "orderList");
 
 //     useEffect(() => {
 //         if (orderDetails !== null) setOpenDetailsDialog(true);
 //     }, [orderDetails]);
 
-//     console.log(orderDetails, "orderDetails");
-
 //     return (
 //         <Card>
 //         <CardHeader>
-//             <CardTitle>Order History</CardTitle>
+//             <CardTitle>All Orders</CardTitle>
 //         </CardHeader>
 //         <CardContent>
 //             <Table>
@@ -58,23 +57,22 @@
 //                 </TableRow>
 //             </TableHeader>
 //             <TableBody>
-//                 {/* {orderList && orderList.length > 0 */}
-//                 {/* ? orderList.map((orderItem) => ( */}
+//                 {orderList && orderList.length > 0
+//                 ? orderList.map((orderItem) => (
 //                     <TableRow>
-//                         <TableCell>{/*{orderItem?._id}*/} OrderItem</TableCell>
-//                         <TableCell>OrderDate</TableCell>
+//                         <TableCell>{orderItem?._id}</TableCell>
+//                         <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
 //                         <TableCell>
 //                         <Badge
-//                             className="py-1 px-3" 
-//                             // ${
-//                             // orderItem?.orderStatus === "confirmed"
-//                             //     ? "bg-green-500"
-//                             //     : orderItem?.orderStatus === "rejected"
-//                             //     ? "bg-red-600"
-//                             //     : "bg-black"
-//                             // }`}
+//                             className={`py-1 px-3 ${
+//                             orderItem?.orderStatus === "confirmed"
+//                                 ? "bg-green-500"
+//                                 : orderItem?.orderStatus === "rejected"
+//                                 ? "bg-red-600"
+//                                 : "bg-black"
+//                             }`}
 //                         >
-//                             {/* {orderItem?.orderStatus} */}
+//                             {orderItem?.orderStatus}
 //                         </Badge>
 //                         </TableCell>
 //                         <TableCell>${orderItem?.totalAmount}</TableCell>
@@ -83,22 +81,22 @@
 //                             open={openDetailsDialog}
 //                             onOpenChange={() => {
 //                             setOpenDetailsDialog(false);
-//                             // dispatch(resetOrderDetails());
+//                             dispatch(resetOrderDetails());
 //                             }}
 //                         >
 //                             <Button
-//                             // onClick={() =>
-//                             //     handleFetchOrderDetails(orderItem?._id)
-//                             // }
+//                             onClick={() =>
+//                                 handleFetchOrderDetails(orderItem?._id)
+//                             }
 //                             >
 //                             View Details
 //                             </Button>
-//                             <ShoppingOrderDetailsView orderDetails={orderDetails} />
+//                             <AdminOrderDetailsView orderDetails={orderDetails} />
 //                         </Dialog>
 //                         </TableCell>
 //                     </TableRow>
 //                     ))
-//                 {/* : null} */}
+//                 : null}
 //             </TableBody>
 //             </Table>
 //         </CardContent>
@@ -106,4 +104,4 @@
 //     );
 // }
 
-// export default ShoppingOrders;
+// export default AdminOrdersView;
