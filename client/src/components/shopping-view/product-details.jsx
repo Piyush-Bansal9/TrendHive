@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { Separator } from "../ui/separator";
 import { setProductDetails } from "../../store/shopping/products-slice";
-import { addToCart, fetchCartItems } from "../../store/shopping/cart-slice";
+import { addToCart } from "../../store/shopping/cart-slice";
 
 
 function ProductDetailsDialog({open, setOpen, productDetails}) {

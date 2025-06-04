@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import adminProductsRouter from './routes/admin/products_routes.js'
+import adminOrderRouter from './routes/admin/order-routes.js'
 import shopProductsRouter from './routes/shopping/products-routes.js'
 import shopCartRouter from './routes/shopping/cart-routes.js'
 import shopAddressRouter from './routes/shopping/address-routes.js'
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter);
+app.use("/api/admin/orders", adminOrderRouter)
 app.use("/api/shopping/products", shopProductsRouter);
 app.use("/api/shopping/cart", shopCartRouter);
 app.use("/api/shopping/address", shopAddressRouter);
