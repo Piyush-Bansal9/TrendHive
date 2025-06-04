@@ -32,22 +32,17 @@ function ShoppingCheckout() {
         : 0;
 
     function handleInitiatePaypalPayment() {
-    //     if (cartItems.length === 0) {
-    //         toast({
-    //             title: "Your cart is empty. Please add items to proceed",
-    //             variant: "destructive",
-    //         });
+        if (cartItems.length === 0) {
+            alert("Your cart is empty. Please add items to proceed"
+            );
 
-    //         return;
-    //     }
-    //     if (currentSelectedAddress === null) {
-    //         toast({
-    //             title: "Please select one address to proceed.",
-    //             variant: "destructive",
-    //         });
+            return;
+        }
+        if (currentSelectedAddress === null) {
+            alert("Please select one address to proceed.");
 
-    //         return;
-    //     }
+            return;
+        }
 
         const orderData = {
             userId: user?.id,

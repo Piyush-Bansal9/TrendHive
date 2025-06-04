@@ -1,7 +1,7 @@
 import paypal from "../../helpers/paypal.js";
 import Order from "../../models/Order.js";
-// const Cart = require("../../models/Cart");
-// const Product = require("../../models/Product");
+import Cart from "../../models/Cart.js";
+import Product from "../../models/Product.js";
 
 const createOrder = async (req, res) => {
     try {
@@ -94,4 +94,57 @@ const createOrder = async (req, res) => {
     }
 };
 
-export {createOrder};
+const capturePayment = async (req, res) => {
+    try {
+        const { paymentId, payerId, orderId } = req.body;
+    
+        let order = await Order.findById(orderId);
+    
+        if (!order) {
+            return res.status(404).json({
+            success: false,
+            message: "Order can not be found",
+            });
+        }
+    
+        order.paymentStatus = "paid";
+        order.orderStatus = "confirmed";
+        order.paymentId = paymentId;
+        order.payerId = payerId;
+    
+        // for (let item of order.cartItems) {
+        //     let product = await Product.findById(item.productId);
+    
+        //     if (!product) {
+        //     return res.status(404).json({
+        //         success: false,
+        //         message: `Not enough stock for this product ${product.title}`,
+        //     });
+        //     }
+    
+        //     product.totalStock -= item.quantity;
+    
+        //     await product.save();
+        // }
+    
+        const getCartId = order.cartId;
+        await Cart.findByIdAndDelete(getCartId);
+    
+        await order.save();
+    
+        res.status(200).json({
+            success: true,
+            message: "Order confirmed",
+            data: order,
+        });
+        } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            success: false,
+            message: "Some error occured!",
+        });
+        }
+    };
+
+
+export {createOrder, capturePayment};
