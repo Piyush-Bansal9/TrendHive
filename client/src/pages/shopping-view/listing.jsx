@@ -32,6 +32,8 @@ function ShoppingListing() {
     const [openDeatilsDialog, setOpenDetailsDialog] = useState(false);
     const {user} = useSelector(state => state.auth);
 
+    const categorySearchParam = searchParams.get("category");
+
     function handleSort(value) {
         setSort(value);
     }
@@ -78,7 +80,7 @@ function ShoppingListing() {
     useEffect(() => {
         setSort("price-lowtohigh");
         setFilters(JSON.parse(sessionStorage.getItem("filters")) || {})
-    }, [searchParams])
+    }, [categorySearchParam])
 
     // Update the search address whenever filters are changed(checked or unchecked)
     useEffect(() => {
