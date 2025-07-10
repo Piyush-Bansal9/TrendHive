@@ -86,17 +86,18 @@ This project supports both admin and shopper roles, secure authentication, order
 
 Follow the steps below to set up and run the project locally.
 
-### 1. Clone the Repository
 
 ```bash
+1. Clone the Repository
 git clone https://github.com/yourusername/mern-ecommerce.git
 cd mern-ecommerce
-2. Set Up Environment Variables
-Create .env files in both the server/ and client/ folders. Refer to .env.example if provided.
 
+
+2. Set Up Environment Variables
+
+Create .env files in both the server/ and client/ folders. 
 Example: server/.env
 env
-
 MONGO_URI=your_mongodb_atlas_uri
 JWT_SECRET=your_jwt_secret
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud
@@ -107,22 +108,34 @@ Example: client/.env
 env
 VITE_API_BASE_URL=http://localhost:5000/api
 VITE_PAYPAL_CLIENT_ID=your_paypal_client_id
-3. Install Dependencies
 
+3. Install Dependencies
 # Root project dependencies (including concurrently)
 npm install
-
 # Install client dependencies
 cd client
 npm install
-
 # Install server dependencies
 cd ../server
 npm install
+
 4. Run the Application
 npm run dev
-
 React Client: http://localhost:5173
-
 Express API Server: http://localhost:5000/api
+
+```
+### 🙏 Acknowledgements
+
+-Redux Toolkit
+
+-Tailwind CSS
+
+-shadcn/ui
+
+-PayPal Developer
+
+-Cloudinary
+
+-MongoDB Atlas
 
