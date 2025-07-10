@@ -75,10 +75,10 @@ This project supports both admin and shopper roles, secure authentication, order
 
 ---
 
-## 📁 Folder Structure
+## 🌐 Future Enhancements
 
-mern-ecommerce/
-├── client/ # React frontend
-├── server/ # Express backend
-├── .env # Environment variables (not committed)
-└── README.md
+- [ ] Stripe payment gateway as an alternative to PayPal.
+- [ ] Sales analytics dashboard for admins.
+- [ ] Search functionality with Algolia or Elastic.
+- [ ] Advanced order tracking & shipment module.
+
