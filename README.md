@@ -91,7 +91,29 @@ Follow the steps below to set up and run the project locally.
 ```bash
 git clone https://github.com/yourusername/mern-ecommerce.git
 cd mern-ecommerce
+2. Set Up Environment Variables
+Create .env files in both the server/ and client/ folders. Refer to .env.example if provided.
 
+Example: server/.env
+env
+Copy
+Edit
+MONGO_URI=your_mongodb_atlas_uri
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+PAYPAL_CLIENT_ID=your_paypal_client_id
+Example: client/.env
+env
+Copy
+Edit
+VITE_API_BASE_URL=http://localhost:5000/api
+VITE_PAYPAL_CLIENT_ID=your_paypal_client_id
+3. Install Dependencies
+bash
+Copy
+Edit
 # Root project dependencies (including concurrently)
 npm install
 
@@ -102,3 +124,14 @@ npm install
 # Install server dependencies
 cd ../server
 npm install
+4. Run the Application
+bash
+Copy
+Edit
+npm run dev
+This will concurrently launch:
+
+React Client: http://localhost:5173
+
+Express API Server: http://localhost:5000/api
+
