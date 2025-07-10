@@ -34,3 +34,51 @@ This project supports both admin and shopper roles, secure authentication, order
 
 ### 💾 State Management
 - Redux Toolkit slices by domain: auth, cart, products, orders,
+- Async thunks for API integration and side effects.
+
+### 💡 UX & UI
+- Responsive design with Tailwind CSS.
+- Reusable components (forms, modals, buttons).
+- Toast notifications, loading indicators, and form validation.
+
+---
+
+## 🧰 Tech Stack
+
+**Frontend:**
+- React
+- Redux Toolkit
+- Tailwind CSS
+- shadcn/ui
+
+**Backend:**
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- Multer (file uploads)
+- Cloudinary (image hosting)
+- JWT (authentication)
+
+**Payments:**
+- PayPal REST APIs (sandbox mode)
+
+**Development Tools:**
+- Vite
+- Postman
+- dotenv
+- concurrently
+
+**Deployment (Planned):**
+- Vercel (Frontend)
+- Render (Backend)
+
+---
+
+## 📁 Folder Structure
+
+mern-ecommerce/
+├── client/ # React frontend
+├── server/ # Express backend
+├── .env # Environment variables (not committed)
+└── README.md
