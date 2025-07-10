@@ -82,3 +82,23 @@ This project supports both admin and shopper roles, secure authentication, order
 - [ ] Search functionality with Algolia or Elastic.
 - [ ] Advanced order tracking & shipment module.
 
+## 🚀 Getting Started
+
+Follow the steps below to set up and run the project locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/mern-ecommerce.git
+cd mern-ecommerce
+
+# Root project dependencies (including concurrently)
+npm install
+
+# Install client dependencies
+cd client
+npm install
+
+# Install server dependencies
+cd ../server
+npm install
