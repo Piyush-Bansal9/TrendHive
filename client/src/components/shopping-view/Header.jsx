@@ -1,15 +1,15 @@
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react"
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom"
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
-import { Button } from "../ui/button"
-import { Label } from "../ui/label";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet.jsx"
+import { Button } from "../ui/button.jsx"
+import { Label } from "../ui/label.jsx";
 import { shoppingViewHeaderMenuItems } from "../../config";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu.jsx";
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/auth-slice";
 import { useEffect, useState } from "react";
-import UserCartWrapper from "./cart-wrapper";
+import UserCartWrapper from "./cart-wrapper.jsx";
 import { fetchCartItems } from "../../store/shopping/cart-slice";
 
 function MenuItems() {
@@ -19,7 +19,7 @@ function MenuItems() {
     function handleNavigate(menuItem) {
         sessionStorage.removeItem("filters");
         const currentFilter = menuItem.id !== 'home' &&
-        getCurrentMenuItem.id !== "products" ? 
+        menuItem.id !== "products" ? 
         {
             category : [menuItem.id]
         } : null
@@ -110,7 +110,7 @@ function ShoppingHeader() {
     return (
         <header className="sticky top-0 z-40 w-full border-b bg-background">
         <div className="flex h-16 items-center justify-between px-4 md:px-6">
-            <Link to="/shop/home" className="flex items-center gap-2">
+            <Link to="/shopping/home" className="flex items-center gap-2">
                 <HousePlug className="h-6 w-6" />
                 <span className="font-bold">Ecommerce</span>
             </Link>

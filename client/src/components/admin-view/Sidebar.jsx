@@ -4,7 +4,7 @@ import { Shield } from 'lucide-react';
 import { LayoutDashboard } from 'lucide-react';
 import { ShoppingBasket } from 'lucide-react';
 import { CheckCheck } from 'lucide-react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet.jsx';
 
 const sidebarMenuItems = [
         {

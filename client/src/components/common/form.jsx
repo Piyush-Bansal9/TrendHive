@@ -1,6 +1,6 @@
 import { Label } from '../ui/label.jsx'
 import { Input } from '../ui/input.jsx';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select.jsx';
 import { Textarea } from '../ui/textarea.jsx';
 import { Button } from '../ui/button.jsx';
 

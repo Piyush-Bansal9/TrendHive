@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { Label } from "../ui/label.jsx";
+import { Input } from "../ui/input.jsx";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button.jsx";
 import axios from "axios";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../ui/skeleton.jsx";
 
 
 export default function ProductImageUpload({imageFile, setImageFile, uploadedimageURL, setuploadedImageURL, setImageLoading, imageLoading, isEditMode}) {

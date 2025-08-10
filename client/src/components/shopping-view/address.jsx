@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Form from "../common/form";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import Form from "../common/form.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card.jsx";
 import { addressFormControls } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import {

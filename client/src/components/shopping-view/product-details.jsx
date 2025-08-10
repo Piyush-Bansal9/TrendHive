@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { Separator } from "../ui/separator";
+import { Button } from "../ui/button.jsx";
+import { Dialog, DialogContent } from "../ui/dialog.jsx";
+import { Separator } from "../ui/separator.jsx";
 import { setProductDetails } from "../../store/shopping/products-slice";
 import { addToCart } from "../../store/shopping/cart-slice";
 

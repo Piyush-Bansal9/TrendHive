@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '../ui/button.jsx'
 import { AlignJustify} from 'lucide-react'
 import { LogOut } from 'lucide-react';
 import { useDispatch } from 'react-redux';
