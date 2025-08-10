@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import AuthLayout from './components/auth/layout'
 import Signin from './pages/auth/Signin'
 import Signup from './pages/auth/Signup'
@@ -37,6 +37,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path='/' element={<Navigate to="/auth/signin" replace />}/>
         <Route path='/auth' element = {
           <CheckAuth isAuthenticated={isAuthenticated} user={user} >
             <AuthLayout/>
