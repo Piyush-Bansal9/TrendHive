@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "serve -s dist -l $PORT",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -30,6 +31,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.0",
+    "serve": "^14.2.4",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
